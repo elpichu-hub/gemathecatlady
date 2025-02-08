@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vinnie's Cat Catalog</title>
+  <style>
+    /* Hide all content until password is provided */
+    #content {
+      display: none;
+    }
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: radial-gradient(circle, #ff7e5f, #feb47b);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Header with Crazy Animated Text */
+    header {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      color: #fff;
+      border-bottom: 4px double rgba(255, 255, 255, 0.7);
+    }
+    header h1 {
+      font-size: 3rem;
+      animation: shake 1s infinite alternate;
+    }
+    @keyframes shake {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(5px, 5px) rotate(2deg); }
+      50% { transform: translate(-5px, -5px) rotate(-2deg); }
+      75% { transform: translate(5px, -5px) rotate(2deg); }
+      100% { transform: translate(-5px, 5px) rotate(-2deg); }
+    }
+    /* Main Content */
+    main {
+      flex: 1;
+      padding: 20px;
+    }
+    .catalog-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    /* Gallery Grid */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-gap: 20px;
+    }
+    .gallery-item {
+      background: #fff;
+      border: 3px dashed #ff4b2b;
+      border-radius: 10px;
+      padding: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      cursor: pointer;
+    }
+    .gallery-item:hover {
+      transform: scale(1.05) rotate(2deg);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+    }
+    .caption {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #ff416c;
+      color: #fff;
+    }
+    /* Modal Styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.8);
+      backdrop-filter: blur(5px);
+    }
+    .modal-content {
+      margin: 5% auto;
+      display: block;
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 10px;
+      animation: zoom 0.6s;
+    }
+    @keyframes zoom {
+      from {transform: scale(0.5);}
+      to {transform: scale(1);}
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    // Password protection: Only show content if correct password is provided.
+    document.addEventListener("DOMContentLoaded", function() {
+      var userPassword = prompt("Enter password to access this page:");
+      if (userPassword === "gemathetia") {
+        document.getElementById("content").style.display = "block";
+      } else {
+        document.body.innerHTML = "<h1 style='text-align:center;margin-top:20%;'>Access Denied</h1>";
+      }
+    });
+  </script>
+</head>
+<body>
+  <div id="content">
+    <header>
+      <h1>Vinnie's Cat Catalog</h1>
+    </header>
+    <main>
+      <div class="catalog-title">Welcome to the Crazy World of Vinnie!</div>
+      <div class="gallery">
+        <!-- Gallery Items (using the provided images) -->
+        <div class="gallery-item">
+          <img src="1.jpg" alt="Mami, Gemita & VINNIEEEE">
+          <div class="caption">Mami, Gemita & VINNIEEEE</div>
+        </div>
+        <div class="gallery-item">
+          <img src="2.jpg" alt="Vinnie Photo 2">
+          <div class="caption">Mami and Cato</div>
+        </div>
+        <div class="gallery-item">
+          <img src="3.jpg" alt="Vinnie Photo 3">
+          <div class="caption">Vinnie and the other crazy cat</div>
+        </div>
+        <div class="gallery-item">
+          <img src="4.jpg" alt="Vinnie Photo 4">
+          <div class="caption">Vinnie and the other crazy cat again</div>
+        </div>
+        <div class="gallery-item">
+          <img src="5.jpg" alt="Vinnie Photo 5">
+          <div class="caption">Gema and Vinnie at the cat tree</div>
+        </div>
+        <div class="gallery-item">
+          <img src="IMG_1695.jpg" alt="Vinnie Photo 6">
+          <div class="caption">Gordita</div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2025 Vinnie's Cat Catalog. All rights reserved by Gemuski.</p>
+    </footer>
+
+    <!-- Modal for Enlarged Image -->
+    <div id="modal" class="modal">
+      <span class="close" id="modal-close">&times;</span>
+      <img class="modal-content" id="modal-image">
+      <div class="caption" id="modal-caption"></div>
+    </div>
+  </div>
+  
+  <script>
+    // Get the modal elements
+    var modal = document.getElementById("modal");
+    var modalImg = document.getElementById("modal-image");
+    var modalCaption = document.getElementById("modal-caption");
+    var modalClose = document.getElementById("modal-close");
+
+    // Add click event listeners to all gallery items
+    var galleryItems = document.querySelectorAll(".gallery-item");
+
+    galleryItems.forEach(function(item) {
+      item.addEventListener("click", function() {
+        var img = item.querySelector("img");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+        modalCaption.textContent = item.querySelector(".caption").textContent;
+      });
+    });
+
+    // Close the modal when the user clicks the close button
+    modalClose.addEventListener("click", function() {
+      modal.style.display = "none";
+    });
+
+    // Also close the modal when clicking outside the modal content
+    window.addEventListener("click", function(event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>
